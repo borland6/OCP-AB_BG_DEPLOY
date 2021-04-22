@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: route-alternate-service
+  annotations:
+    haproxy.router.openshift.io/balance: roundrobin  
+spec:
+  host: abnginx-test-project-2.apps.experteam.com.tw 
+  to:
+    kind: Service
+    name: nginx-1  
+    weight: 30         
+  alternateBackends:
+  - kind: Service
+    name: nginx-2 
+    weight: 70          
